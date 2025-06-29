@@ -10,6 +10,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # TEST CONNECTION
+@app.route("/test-db")
+def test_db():
+    from sqlalchemy import text
+    result = db.session.execute(text("SELECT 1")).scalar()
+    return f"Database OK: {result}"
 try:
     with app.app_context():
         db.session.execute(text('SELECT 1'))  # Now properly wrapped
