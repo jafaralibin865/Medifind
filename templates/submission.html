@@ -177,7 +177,7 @@
             <p>Register your healthcare facility with MediFind Kenya to reach more patients</p>
         </header>
         
-        <form id="hospital-registration-form">
+        <form id="hospital-registration-form" method="POST" action="/register">
             <!-- Basic Information Section -->
             <div class="form-section">
                 <h2>
@@ -418,7 +418,16 @@
                 // });
                 
                 // Simulate API delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                const response = await fetch('/submit-hospital', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(hospitalData)
+});
+
+if (!response.ok) {
+  throw new Error('Submission failed');
+}
+
                 
                 // Show success message
                 document.getElementById('submission-feedback').innerHTML = `
