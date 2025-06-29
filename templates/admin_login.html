@@ -1,0 +1,138 @@
+<!-- templates/admin_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Admin Login - MediFind Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Include all previous styles */
+        
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .login-image {
+            flex: 1;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            color: white;
+            text-align: center;
+        }
+        
+        .login-image-content {
+            max-width: 500px;
+        }
+        
+        .login-image h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .login-form {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            background: white;
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-image">
+            <div class="login-image-content">
+                <h1>Hospital Management Portal</h1>
+                <p>Manage your hospital's information on MediFind Kenya to help patients find the specialized care they need.</p>
+                <div style="margin-top: 50px; font-size: 5rem;">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-form">
+            <div class="form-container">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <i class="fas fa-hospital" style="font-size: 3rem; color: var(--primary);"></i>
+                    <h2>MediFind Kenya Admin</h2>
+                </div>
+                
+                {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                </div>
+                {% endif %}
+                
+                <form action="/admin/login" method="post">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                        Login to Dashboard
+                    </button>
+                </form>
+                
+                <div style="text-align: center; margin-top: 30px; color: var(--gray);">
+                    <p>Need an account? Contact our support team</p>
+                    <p><i class="fas fa-phone"></i> +254 700 123 456 | <i class="fas fa-envelope"></i> support@medifind.co.ke</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediFind Kenya - Find Specialized Hospitals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+        }
+        
+        /* Search Section */
+        .search-section {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .search-box input, .search-box select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus, .search-box select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 42px;
+            color: var(--gray);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .feature-icon i {
+            font-size: 30px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            padding: 100px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-it-works .section-header {
+            margin-bottom: 80px;
+        }
+        
+        .how-it-works .section-header h2, 
+        .how-it-works .section-header p {
+            color: white;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+            z-index: 2;
+            width: 25%;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 25px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .step p {
+            opacity: 0.9;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            z-index: 1;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .steps {
+                flex-wrap: wrap;
+            }
+            
+            .step {
+                width: 50%;
+                margin-bottom: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .step {
+                width: 100%;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+        }
+        
+        /* Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-hospital"></i>
+                    <span>MediFind Kenya</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">How It Works</a>
+                    <a href="#">Hospitals</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="{{ url_for('submission') }}">Register Your Hospital Now</a>
+                    
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Hospitals Specialized in Treating Your Condition</h1>
+                <p>Save time and lives by connecting directly with hospitals equipped to treat your specific medical condition across Kenya.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary pulse">Find Hospitals Now</button>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Healthcare in Kenya">
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="container">
+        <div class="search-section">
+            <h2 style="margin-bottom: 30px; text-align: center; color: var(--dark);">Find the Right Hospital</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <label for="condition">Medical Condition</label>
+                    <input type="text" id="condition" placeholder="Enter condition (e.g. Malaria, Diabetes)">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="search-box">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Enter county or town">
+                    <i class="fas fa-map-marker-alt search-icon"></i>
+                </div>
+                <div class="search-box">
+                    <label for="facility-type">Facility Type</label>
+                    <select id="facility-type">
+                        <option value="">All Facilities</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="clinic">Clinic</option>
+                        <option value="specialized">Specialized Center</option>
+                    </select>
+                </div>
+                <div class="search-box" style="display: flex; align-items: flex-end;">
+                    <button class="btn btn-primary" style="height: 52px; width: 100%;">Search Hospitals</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose MediFind Kenya</h2>
+                <p>Our platform helps you find the right medical care when it matters most</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Specialized Treatment</h3>
+                    <p>Find hospitals with verified expertise in treating your specific condition, saving you from misdiagnosis and wasted time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Real-Time Availability</h3>
+                    <p>See which hospitals have available beds, specialists, and equipment before you make the trip.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Verified Information</h3>
+                    <p>All hospitals are verified through government and medical association databases for accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Low-Bandwidth Access</h3>
+                    <p>Access our services via SMS/USSD in areas with limited internet connectivity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Multilingual Support</h3>
+                    <p>Available in English, Swahili, and local languages to ensure everyone can access healthcare information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>NHIF Integration</h3>
+                    <p>Filter hospitals that accept NHIF insurance to make healthcare more affordable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How MediFind Works</h2>
+                <p>Find the right specialized care in just four simple steps</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Enter Your Condition</h3>
+                    <p>Tell us about the medical condition you need treatment for</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Set Your Location</h3>
+                    <p>Enter your location or allow us to detect it automatically</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Find Specialized Hospitals</h3>
+                    <p>We'll show hospitals nearby that treat your specific condition</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Treatment</h3>
+                    <p>Contact the hospital or request an ambulance directly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-text">Verified Hospitals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45</div>
+                    <div class="stat-text">Medical Conditions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-text">Counties Covered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-text">User Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <i class="fas fa-hospital"></i>
+                        <span>MediFind Kenya</span>
+                    </div>
+                    <p style="margin: 20px 0; color: #cbd5e1;">Connecting patients with specialized healthcare providers across Kenya.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Find Hospitals</a></li>
+                        <li><a href="#">For Hospitals</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Medical Conditions</h3>
+                    <ul>
+                        <li><a href="#">Malaria Treatment</a></li>
+                        <li><a href="#">Diabetes Care</a></li>
+                        <li><a href="#">Maternal Health</a></li>
+                        <li><a href="hospitals.html">Cancer Centers</a></li>
+                        <li><a href="#">Dialysis Centers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        <li><i class="fas fa-phone"></i> +254 700 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@medifind.co.ke</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Support</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MediFind Kenya. All rights reserved. Saving lives through better healthcare access.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            const condition = document.getElementById('condition').value;
+            const location = document.getElementById('location').value;
+            
+            if(condition && location) {
+                alert(`Searching for hospitals treating "${condition}" near "${location}"...`);
+                // In a real app, this would make an API call to your backend
+            } else {
+                alert('Please enter both a medical condition and location');
+            }
+        });
+        
+        // Animated scrolling for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Simple autocomplete for conditions
+        const conditions = ["Malaria", "Diabetes", "Hypertension", "HIV/AIDS", "Tuberculosis", 
+                           "Pneumonia", "Cancer", "Stroke", "Kidney Disease", "Maternal Care",
+                           "Pediatric Care", "Cardiology", "Orthopedics", "Dermatology"];
+        
+        const conditionInput = document.getElementById('condition');
+        conditionInput.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            if(value.length < 2) return;
+            
+            // Filter conditions
+            const filtered = conditions.filter(cond => 
+                cond.toLowerCase().includes(value)
+            );
+            
+            // Show suggestions (in a real app, this would be more advanced)
+            if(filtered.length > 0) {
+                console.log('Suggestions:', filtered.join(', '));
+            }
+        });
+        
+        // Geolocation
+        document.getElementById('location').addEventListener('focus', function() {
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    // Reverse geocode would happen here in a real app
+                    this.value = "Nearby";
+                    console.log("Location detected:", position.coords.latitude, position.coords.longitude);
+                }, error => {
+                    console.log("Geolocation error:", error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
