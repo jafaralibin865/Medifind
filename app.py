@@ -1,19 +1,21 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text  # Important addition
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# Fix the PostgreSQL URL format
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace('postgres://', 'postgresql://', 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db =SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 # TEST CONNECTION
 try:
     with app.app_context():
-        db.session.execute('SELECT 1')
+        db.session.execute(text('SELECT 1'))  # Now properly wrapped
     print("✅ Database connection successful!")
 except Exception as e:
-    print("❌ Database connection failed:",e)
+    print("❌ Database connection failed:", e)
 app.secret_key = 'kenya_healthcare_secret_2023_@medifind!'
 
 # Hardcoded data for frontend testing
