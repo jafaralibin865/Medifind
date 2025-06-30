@@ -26,9 +26,6 @@ class Hospital(db.Model):
     facilities = db.Column(db.String(300))  # comma-separated: "NHIF,24hr,Maternity"
     specialties = db.Column(db.Text)        # comma-separated: "Pediatrics,Cardiology"
 
-    # Geolocation
-    latitude = db.Column(db.Float)
-    longitude = db.Column(db.Float)
-
+    
     def __repr__(self):
         return f"<Hospital {self.hospital_name} in {self.county}>"

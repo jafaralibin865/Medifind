@@ -71,8 +71,7 @@ def register_hospital():
         email=data.get("contact-email"),
         facilities=",".join(facilities),
         specialties=data.get("specialties"),
-        latitude=data.get("lat"),
-        longitude=data.get("lng")
+        
     )
 
     db.session.add(hospital)
