@@ -28,14 +28,14 @@
                 </h2>
                 
                 <div class="form-group">
-                    <label for="hospital-name" class="required">Hospital Name</label>
+                    <label for="hospital-name" name="hospital-name"class="required">Hospital Name</label>
                     <input type="text" id="hospital-name" required>
                     <div class="error" id="name-error">Please enter a valid hospital name</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="county" class="required">County</label>
-                    <select id="county" required>
+                    <select id="county" name="county" required>
                         <option value="">Select County</option>
                         <!-- Kenyan counties will be populated by JavaScript -->
                     </select>
@@ -44,7 +44,7 @@
                 
                 <div class="form-group">
                     <label for="physical-address" class="required">Physical Address</label>
-                    <textarea id="physical-address" rows="3" required></textarea>
+                    <textarea id="physical-address" name="physical-address" required></textarea>
                     <div class="error" id="address-error">Please enter a valid address</div>
                 </div>
             </div>
@@ -61,25 +61,25 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="phone" class="required">Main Phone Number</label>
-                        <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="07XXXXXXXX" required>
+                        <input type="tel" id="phone" name="phone"pattern="[0-9]{10}" placeholder="07XXXXXXXX" required>
                         <div class="error" id="phone-error">Please enter a valid Kenyan phone number (e.g., 0712345678)</div>
                     </div>
                     
                     <div class="form-group">
                         <label for="alt-phone">Alternative Phone</label>
-                        <input type="tel" id="alt-phone" placeholder="Optional">
+                        <input type="tel" id="alt-phone" name="alt-phone"placeholder="Optional">
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="contact-person" class="required">Contact Person</label>
-                    <input type="text" id="contact-person" required>
+                    <input type="text" id="contact-person" name="contact-person" required>
                     <div class="error" id="contact-error">Please enter a contact person</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="contact-email" class="required">Contact Email</label>
-                    <input type="email" id="contact-email" required>
+                    <input type="email" id="contact-email" name="contact-email" required>
                     <div class="error" id="email-error">Please enter a valid email address</div>
                 </div>
             </div>
@@ -98,26 +98,26 @@
                 <div class="form-group">
                     <label>Facilities</label>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="24hr-service">
+                        <input type="checkbox" id="24hr-service" name="24hr-service">
                         <label for="24hr-service">24-Hour Service</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="nhif-accepted">
+                        <input type="checkbox" id="nhif-accepted" name="nhif-accepted">
                         <label for="nhif-accepted">NHIF Accepted</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="emergency-services">
+                        <input type="checkbox" id="emergency-services" name="emergency-services">
                         <label for="emergency-services">Emergency Services</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="maternity-services">
+                        <input type="checkbox" id="maternity-services" name="maternity-services">
                         <label for="maternity-services">Maternity Services</label>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="specialties">Specialties (comma separated)</label>
-                    <input type="text" id="specialties" placeholder="e.g., Cardiology, Oncology, Pediatrics">
+                    <input type="text" id="specialties"  name="specialties" placeholder="e.g., Cardiology, Oncology, Pediatrics">
                 </div>
             </div>
             
@@ -144,11 +144,11 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label for="lat">Latitude</label>
-                        <input type="number" id="lat" step="0.000001" placeholder="-1.292066">
+                        <input type="number" id="lat" name="lat" step="0.000001" placeholder="-1.292066">
                     </div>
                     <div class="form-group">
                         <label for="lng">Longitude</label>
-                        <input type="number" id="lng" step="0.000001" placeholder="36.821946">
+                        <input type="number" id="lng" name="lng"step="0.000001" placeholder="36.821946">
                     </div>
                 </div>
             </div>
