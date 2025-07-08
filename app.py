@@ -51,7 +51,7 @@ def Register():
     return render_template('register.html')
 
 @app.route('/login')
-def Register():
+def login():
     return render_template('login.html')
 
 
@@ -90,9 +90,7 @@ def register_hospital():
     return redirect(url_for('submission'))
 
 # Simple confirmation page
-@app.route('/submission')
-def submission():
-    return render_template('submission.html')
+
 
 # DB Test
 @app.route('/test-db')
