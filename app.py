@@ -46,6 +46,11 @@ KENYA_COUNTIES = [
 def index():
     return render_template('index.html', counties=KENYA_COUNTIES)
 
+@app.route('/register')
+def Register():
+    return render_template('register.html')
+
+
 # Form submission route
 @app.route('/register', methods=['POST'])
 def register_hospital():
