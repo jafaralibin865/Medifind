@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Default Title{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <header>{% include 'header.html' %}</header>
+  
+  <main>
+    {% block content %}
+      <!-- Child templates inject here -->
+    {% endblock %}
+  </main>
+
+  <footer>{% include 'footer.html' %}</footer>
+</body>
+</html>
