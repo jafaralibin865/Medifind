@@ -50,9 +50,13 @@ def index():
 def Register():
     return render_template('register.html')
 
+@app.route('/login')
+def Register():
+    return render_template('login.html')
+
 
 # Form submission route
-@app.route('/register', methods=['POST'])
+@app.route('/submission', methods=['POST'])
 def register_hospital():
     data = request.form
 
