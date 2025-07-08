@@ -47,7 +47,7 @@ def index():
     return render_template('index.html', counties=KENYA_COUNTIES)
 
 @app.route('/register')
-def Register():
+def register():
     return render_template('register.html')
 
 @app.route('/login')
@@ -90,7 +90,9 @@ def register_hospital():
     return redirect(url_for('submission'))
 
 # Simple confirmation page
-
+@app.route('/submission')
+def submission():
+    return render_template('submission.html')
 
 # DB Test
 @app.route('/test-db')
