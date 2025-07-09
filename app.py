@@ -58,23 +58,18 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route('/search')
+@app.route('/search', methods=['GET', 'POST'])
 def search():
     condition = request.args.get('condition', '').lower()
     location = request.args.get('location', '').lower()
 
-    conn = SQLAlchemy.connect(...)  # or use SQLAlchemy
-    cur = conn.cursor()
-
-    query = """
-        SELECT name, county, specialties, address, phone 
-        FROM hospitals 
-        WHERE LOWER(county) = %s AND LOWER(specialties) LIKE %s
-    """
-    cur.execute(query, (location, f"%{condition}%"))
-    results = cur.fetchall()
+    results = Hospital.query.filter(
+        Hospital.county.ilike(f"%{location}%"),
+        Hospital.specialties.ilike(f"%{condition}%")
+    ).all()
 
     return render_template("search_results.html", hospitals=results)
+
 
 
 # Form submission route
