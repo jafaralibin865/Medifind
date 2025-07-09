@@ -2,7 +2,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from models import db, Hospital
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import db, Hospital,User
 
 app = Flask(__name__)
 
@@ -46,9 +47,35 @@ KENYA_COUNTIES = [
 def index():
     return render_template('index.html', counties=KENYA_COUNTIES)
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        full_name = request.form['full_name']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if passwords match
+        if password != confirm_password:
+            flash("❌ Passwords do not match!", "error")
+            return redirect(url_for('register'))
+
+        # Check if email is already used
+        if User.query.filter_by(email=email).first():
+            flash("⚠️ Email already registered!", "error")
+            return redirect(url_for('register'))
+
+        # Hash and save user
+        hashed_password = generate_password_hash(password)
+        new_user = User(full_name=full_name, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("✅ Registered successfully! Please log in.", "success")
+        return redirect(url_for('login'))
+
     return render_template('register.html')
+
 
 @app.route('/login')
 def login():
