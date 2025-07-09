@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Registration - MediFind Kenya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='submission.css')}}">
 
   <!--<link rel="stylesheet" href="{{ url_for('static', filename='submission.css') }}"-->
     <style>
@@ -82,7 +83,7 @@ input, select {
             <p>Register your healthcare facility with MediFind Kenya to reach more patients</p>
         </header>
         
-        <form id="hospital-registration-form" method="POST" action="/register">
+        <form id="hospital-registration-form" method="POST" action="/submission">
             <!-- Basic Information Section -->
             <div class="form-section">
                 <h2>
