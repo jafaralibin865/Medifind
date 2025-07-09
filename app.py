@@ -58,6 +58,10 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/search_results')
+def search():
+    return render_template('search_results.html')
+
 # Form submission route
 @app.route('/submission', methods=['POST'])
 def register_hospital():

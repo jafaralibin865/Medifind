@@ -569,9 +569,12 @@
                         <option value="specialized">Specialized Center</option>
                     </select>
                 </div>
-                <div class="search-box" style="display: flex; align-items: flex-end;">
-                    <button class="btn btn-primary" style="height: 52px; width: 100%;">Search Hospitals</button>
-                </div>
+               <div class="search-box" style="display: flex; align-items: flex-end;">
+    <a href="{{ url_for('search_results') }}" class="btn btn-primary" style="height: 52px; width: 100%; text-align: center; line-height: 36px;">
+        Search Hospitals
+    </a>
+</div>
+
             </div>
         </div>
     </section>
