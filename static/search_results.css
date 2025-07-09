@@ -1,0 +1,84 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f6f8fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header img {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.header h2 {
+  color: #007B8A; /* Custom brand color */
+  font-weight: 600;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.hospital-card {
+  background-color: #ffffff;
+  border-left: 5px solid #007B8A;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 123, 138, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.hospital-card:hover {
+  transform: scale(1.02);
+}
+
+.hospital-card h3 {
+  color: #004d61;
+  margin-bottom: 10px;
+}
+
+.hospital-card a {
+  color: #007B8A;
+  text-decoration: none;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #c0392b;
+  background-color: #fef2f2;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.back-button {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.back-button a {
+  background-color: #007B8A;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button a:hover {
+  background-color: #005b66;
+}
