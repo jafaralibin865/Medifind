@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch('/register', {
+            const response = await fetch('/submission', {
                 method: 'POST',
                 body: formData
             });
