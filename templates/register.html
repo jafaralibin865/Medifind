@@ -4,7 +4,8 @@
 <div class="auth-container">
   <div class="auth-card">
     <div class="auth-header">
-      <img src="{{ url_for( filename='images/MediFind Logo Design.png') }}" alt="App Logo" class="auth-logo">
+      <img src="{{ url_for('static', filename='images/medifind.png') }}" alt="App Logo">
+
       <h2>Admin Registration</h2>
       <p>Create your administrator account</p>
     </div>
@@ -17,7 +18,7 @@
       {% endif %}
     {% endwith %}
 
-    <form method="POST" class="auth-form">
+    <form method="POST" class="auth-form" action="register">
       <div class="form-group">
         <label for="username">Username *</label>
         <div class="input-with-icon">
@@ -81,7 +82,7 @@
       </button>
 
       <div class="auth-links">
-        Already have an account? <a href="{{ url_for('admin_login') }}">Sign in here</a>
+        Already have an account? <a href="{{ url_for('login') }}">Sign in here</a>
       </div>
     </form>
   </div>
