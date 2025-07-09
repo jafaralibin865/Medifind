@@ -17,12 +17,13 @@ body {
 
 /* Auth container (outer box) */
 .auth-container {
-  width: 100%;
-  max-width: 450px;
-  background: #fff;
-  padding: 40px 30px;
+    width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 30px 20px;
   border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 /* Header section of the form */
@@ -130,8 +131,7 @@ body {
 }
 
 /* Responsive tweak */
-@media (max-width: 500px) {
-  .auth-container {
-    padding: 30px 20px;
-  }
-}
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }}
