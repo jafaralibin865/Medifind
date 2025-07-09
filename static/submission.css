@@ -1,64 +1,169 @@
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #059669;
-            --danger: #dc2626;
-            --light: #f8fafc;
-            --dark: #0f172a;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f1f5f9;
-    padding: 2rem;
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #00b4db, #0083b0);
+  color: #333;
+  padding: 30px 15px;
+}
+
+/* Container */
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 15px;
+  max-width: 900px;
+  margin: auto;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #0083b0;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section {
+  margin-bottom: 35px;
+}
+
+.form-section h2 {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #0083b0;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
 label.required::after {
-    content: " *";
-    color: red;
+  content: "*";
+  color: red;
+  margin-left: 4px;
 }
 
-input, select {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
 }
 
-.btn {
-    background: #2563eb;
-    color: white;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+textarea {
+  resize: vertical;
+  min-height: 80px;
 }
 
+/* Error message */
 .error {
-    color: red;
-    font-size: 0.875rem;
-    display: none;
+  font-size: 13px;
+  color: #d93025;
+  display: none;
+  margin-top: 5px;
+}
+
+/* Grid for phone & alt-phone */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.checkbox-group {
+  margin-top: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#map-container {
+  border: 2px dashed #ccc;
+  text-align: center;
+  font-style: italic;
+  color: #555;
+}
+
+/* Button */
+.btn {
+  background: #00b4db;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background: #0083b0;
+}
+
+/* Footer */
+.form-footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.form-footer a {
+  color: #00b4db;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 25px 20px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  .form-section h2 {
+    font-size: 18px;
+  }
 }
