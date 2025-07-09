@@ -82,3 +82,51 @@ body {
 .back-button a:hover {
   background-color: #005b66;
 }
+
+/* Toggle Button */
+.toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #007B8A;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.toggle-btn:hover {
+  background-color: #005b66;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f4f4f4;
+}
+
+body.dark-mode .hospital-card {
+  background-color: #2a2a2a;
+  border-left: 5px solid #00d9ff;
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.15);
+}
+
+body.dark-mode .hospital-card h3 {
+  color: #00d9ff;
+}
+
+body.dark-mode a {
+  color: #00d9ff;
+}
+
+body.dark-mode .no-results {
+  background-color: #3b3b3b;
+  color: #f09393;
+}
+
+body.dark-mode .back-button a {
+  background-color: #00d9ff;
+  color: #1e1e1e;
+}

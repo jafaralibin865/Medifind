@@ -2,107 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Search Results | MediFind Kenya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9fafb;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      color: #1e3a8a;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .hospital-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      list-style: none;
-      padding: 0;
-    }
-
-    .hospital-card {
-      background-color: #ffffff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease;
-    }
-
-    .hospital-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .hospital-card h2 {
-      font-size: 1.2rem;
-      color: #111827;
-      margin-bottom: 0.5rem;
-    }
-
-    .hospital-card p {
-      font-size: 0.95rem;
-      color: #4b5563;
-      margin: 0.3rem 0;
-    }
-
-    .highlight {
-      font-weight: 600;
-      color: #1e40af;
-    }
-
-    .no-results {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #6b7280;
-      margin-top: 3rem;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 1rem;
-      }
-
-      h1 {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
+  <title>Search Results - MediFind</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='search_results.css')}}">
 </head>
 <body>
+    <button id="darkToggle" class="toggle-btn">🌙 Toggle Dark Mode</button>
+
   <div class="container">
-    <h1>Hospitals Treating "<span class="highlight">{{ condition }}</span>" in "<span class="highlight">{{ location }}</span>"</h1>
+    <div class="header">
+      <img src="{{ url_for('static', filename='images/Medifind.png') }}" alt="Logo">
+      <h2>🔍 Matching Hospitals</h2>
+    </div>
 
     {% if hospitals %}
-      <ul class="hospital-list">
+      <div class="results-grid">
         {% for hospital in hospitals %}
-        <li class="hospital-card">
-          <h2>{{ hospital.name }}</h2>
-          <p><strong>📍 County:</strong> {{ hospital.county }}</p>
-          <p><strong>🏠 Address:</strong> {{ hospital.address }}</p>
-          <p><strong>📞 Phone:</strong> {{ hospital.phone }}</p>
-          <p><strong>📧 Email:</strong> {{ hospital.contact_email }}</p>
-          <p><strong>🏥 Specialties:</strong> {{ hospital.specialties }}</p>
-          <p><strong>🕐 24hr Service:</strong> {{ 'Yes' if hospital.service_24hr else 'No' }}</p>
-          <p><strong>✅ NHIF Accepted:</strong> {{ 'Yes' if hospital.nhif_accepted else 'No' }}</p>
-        </li>
+          <div class="hospital-card">
+            <h3>{{ hospital.name }}</h3>
+            <p><strong>County:</strong> {{ hospital.county }}</p>
+            <p><strong>Specialties:</strong> {{ hospital.specialties }}</p>
+            <p><strong>Address:</strong> {{ hospital.address }}</p>
+            <p><strong>Phone:</strong> <a href="tel:{{ hospital.phone }}">{{ hospital.phone }}</a></p>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
     {% else %}
-      <p class="no-results">🚫 No hospitals found matching your search criteria.</p>
+      <div class="no-results">
+        😕 No hospitals matched your search.
+      </div>
     {% endif %}
+
+    <div class="back-button">
+      <a href="{{ url_for('index') }}">🔙 Back to Search</a>
+    </div>
   </div>
 </body>
 </html>
