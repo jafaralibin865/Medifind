@@ -158,14 +158,14 @@ def submission():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     # Hardcoded credentials
-    ADMIN_EMAIL = "admin@medifind.com"
-    ADMIN_PASSWORD = "admin123"
+    username = "admin@medifind.com"
+    password = "admin123"
 
     if request.method == 'POST':
-        email = request.form['email']
+        username = request.form['email']
         password = request.form['password']
 
-        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+        if username == username and password == password:
             session['admin_logged_in'] = True
             flash("✅ Admin logged in successfully!", "success")
             return redirect(url_for('system_admin'))
@@ -174,6 +174,8 @@ def admin():
             return redirect(url_for('admin'))
 
     return render_template('admin_login.html')
+
+
 
 
 # DB Test
