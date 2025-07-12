@@ -101,6 +101,13 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/system_admin')
+def system_admin():
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin'))  # Protect the page
+    return render_template('system_admin.html')
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     condition = request.args.get('condition', '').lower()
@@ -157,15 +164,15 @@ def submission():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    # Hardcoded credentials
-    username = "admin@medifind.com"
-    password = "admin123"
+    # Hardcoded admin credentials
+    admin_username = "admin@medifind.com"
+    admin_password = "admin123"
 
     if request.method == 'POST':
-        username = request.form['email']
-        password = request.form['password']
+        input_username = request.form['email']
+        input_password = request.form['password']
 
-        if username == username and password == password:
+        if input_username == admin_username and input_password == admin_password:
             session['admin_logged_in'] = True
             flash("✅ Admin logged in successfully!", "success")
             return redirect(url_for('system_admin'))
@@ -174,6 +181,15 @@ def admin():
             return redirect(url_for('admin'))
 
     return render_template('admin_login.html')
+
+@app.route('/logout-admin')
+def logout_admin():
+    session.pop('admin_logged_in', None)
+    flash("👋 Admin logged out.", "info")
+    return redirect(url_for('admin'))
+
+
+
 
 
 
