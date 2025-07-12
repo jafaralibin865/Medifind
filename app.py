@@ -187,6 +187,27 @@ def admin():
 
     return render_template('admin_login.html')
 
+@app.route('/approve/<int:hospital_id>')
+def approve_hospital(hospital_id):
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin'))
+    hospital = Hospital.query.get_or_404(hospital_id)
+    hospital.status = 'Approved'
+    db.session.commit()
+    flash("✅ Hospital approved", "success")
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/reject/<int:hospital_id>')
+def reject_hospital(hospital_id):
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin'))
+    hospital = Hospital.query.get_or_404(hospital_id)
+    hospital.status = 'Rejected'
+    db.session.commit()
+    flash("⚠️ Hospital rejected", "warning")
+    return redirect(url_for('admin_dashboard'))
+
+
 @app.route('/logout-admin')
 def logout_admin():
     session.pop('admin_logged_in', None)
