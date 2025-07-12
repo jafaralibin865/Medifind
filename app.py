@@ -180,7 +180,7 @@ def admin():
         if input_username == admin_username and input_password == admin_password:
             session['admin_logged_in'] = True
             flash("✅ Admin logged in successfully!", "success")
-            return redirect(url_for('admin_dashboard'))
+            return redirect(url_for('system_admin'))
         else:
             flash("❌ Invalid admin credentials", "error")
             return redirect(url_for('admin'))
