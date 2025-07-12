@@ -102,15 +102,33 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/admin_dashboard')
-def admin_dashboard():
-    return render_template('admin_dashboard.html')
+
 
 @app.route('/system_admin')
 def system_admin():
     if not session.get('admin_logged_in'):
-        return redirect(url_for('admin'))  # Protect the page
+        return redirect(url_for('admin')) 
+    
+    pending_hospitals = Hospital.query.filter_by(status='Pending').all()
+    approved_hospitals = Hospital.query.filter_by(status='Approved').all()
+
+    return render_template('admin_dashboard.html',
+                           pending_hospitals=pending_hospitals,
+                           approved_hospitals=approved_hospitals) # Protect the page
     return render_template('system_admin.html')
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin'))
+
+    pending_hospitals = Hospital.query.filter_by(status='Pending').all()
+    approved_hospitals = Hospital.query.filter_by(status='Approved').all()
+
+    return render_template('admin_dashboard.html',
+                           pending_hospitals=pending_hospitals,
+                           approved_hospitals=approved_hospitals)
+
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -155,6 +173,7 @@ def submission():
         email=data.get("contact-email"),
         facilities=",".join(facilities),
         specialties=data.get("specialties"),
+        
         
     )
 

@@ -24,6 +24,8 @@ class Hospital(db.Model):
     facilities = db.Column(db.String(300))  # e.g. "NHIF,24hr,Maternity"
     specialties = db.Column(db.Text)        # e.g. "Pediatrics,Cardiology"
 
+    status = db.Column(db.String(20), default='Pending')
+
     def __repr__(self):
         return f"<Hospital {self.hospital_name} in {self.county}>"
 
