@@ -150,9 +150,7 @@ def register_hospital():
     return redirect(url_for('submission'))
 
 # Simple confirmation page
-@app.route('/submission')
-def submission():
-    return render_template('submission.html')
+
 
 @app.route('/admin')
 def admin():
