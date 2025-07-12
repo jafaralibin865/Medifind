@@ -155,9 +155,26 @@ def submission():
 # Simple confirmation page
 
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-        return render_template('admin_login.html')
+    # Hardcoded credentials
+    ADMIN_EMAIL = "admin@medifind.com"
+    ADMIN_PASSWORD = "admin123"
+
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+            session['admin_logged_in'] = True
+            flash("✅ Admin logged in successfully!", "success")
+            return redirect(url_for('system_admin'))
+        else:
+            flash("❌ Invalid admin credentials", "error")
+            return redirect(url_for('admin'))
+
+    return render_template('admin_login.html')
+
 
 # DB Test
 @app.route('/test-db')
