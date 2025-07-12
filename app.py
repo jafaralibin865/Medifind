@@ -118,6 +118,9 @@ def search():
 # Form submission route
 @app.route('/submission', methods=['POST', 'GET'])
 def submission():
+
+    if request.method == 'GET':
+        return render_template('submission.html', counties=KENYA_COUNTIES)
     data = request.form
 
     facilities = []
