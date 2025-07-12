@@ -116,8 +116,8 @@ def search():
 
 
 # Form submission route
-@app.route('/submission', methods=['POST'])
-def register_hospital():
+@app.route('/submission', methods=['POST', 'GET'])
+def submission():
     data = request.form
 
     facilities = []
