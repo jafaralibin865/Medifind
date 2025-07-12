@@ -104,18 +104,7 @@ def dashboard():
 
 
 
-@app.route('/system_admin')
-def system_admin():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin')) 
-    
-    pending_hospitals = Hospital.query.filter_by(status='Pending').all()
-    approved_hospitals = Hospital.query.filter_by(status='Approved').all()
 
-    return render_template('admin_dashboard.html',
-                           pending_hospitals=pending_hospitals,
-                           approved_hospitals=approved_hospitals) # Protect the page
-    return render_template('system_admin.html')
 
 @app.route('/admin_dashboard')
 def admin_dashboard():
@@ -133,15 +122,24 @@ def admin_dashboard():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    condition = request.args.get('condition', '').lower()
-    location = request.args.get('location', '').lower()
+    condition = request.args.get('condition', '').strip().lower()
+    location = request.args.get('location', '').strip().lower()
 
-    results = Hospital.query.filter(
-        Hospital.county.ilike(f"%{location}%"),
-        Hospital.specialties.ilike(f"%{condition}%")
-    ).all()
+    query = Hospital.query
+
+    if location:
+        query = query.filter(Hospital.county.ilike(f"%{location}%"))
+    
+    if condition:
+        query = query.filter(Hospital.specialties.ilike(f"%{condition}%"))
+
+    results = query.all()
+
+    if not results:
+        flash("⚠️ No hospitals found matching your search criteria.", "warning")
 
     return render_template("search_results.html", hospitals=results)
+
 
 
 
@@ -185,6 +183,19 @@ def submission():
 
 # Simple confirmation page
 
+@app.route('/system_admin')
+def system_admin():
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin'))  # protect page
+
+    pending_hospitals = Hospital.query.filter_by(status='Pending').all()
+    approved_hospitals = Hospital.query.filter_by(status='Approved').all()
+
+    return render_template(
+        'admin_dashboard.html',
+        pending_hospitals=pending_hospitals,
+        approved_hospitals=approved_hospitals
+    )
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
