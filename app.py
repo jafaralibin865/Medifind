@@ -101,6 +101,11 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    return render_template('admin_dashboard.html')
+
 @app.route('/system_admin')
 def system_admin():
     if not session.get('admin_logged_in'):
@@ -175,7 +180,7 @@ def admin():
         if input_username == admin_username and input_password == admin_password:
             session['admin_logged_in'] = True
             flash("✅ Admin logged in successfully!", "success")
-            return redirect(url_for('system_admin'))
+            return redirect(url_for('admin_dashboard'))
         else:
             flash("❌ Invalid admin credentials", "error")
             return redirect(url_for('admin'))
