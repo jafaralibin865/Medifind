@@ -154,6 +154,10 @@ def register_hospital():
 def submission():
     return render_template('submission.html')
 
+    @app.route('/admin')
+    def admin():
+        return render_template('admin_login.html')
+
 # DB Test
 @app.route('/test-db')
 def test_db():
