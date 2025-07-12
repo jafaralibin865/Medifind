@@ -169,7 +169,7 @@ def admin():
     admin_password = "admin123"
 
     if request.method == 'POST':
-        input_username = request.form['email']
+        input_username = request.form['username']
         input_password = request.form['password']
 
         if input_username == admin_username and input_password == admin_password:
