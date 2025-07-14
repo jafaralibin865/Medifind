@@ -97,15 +97,6 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
-
-@app.route('/admin_dashboard')
-def admin_dashboard():
-    return render_template('admin_dashboard.html')
-
-
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -126,8 +117,6 @@ def search():
         flash("⚠️ No hospitals found matching your search criteria.", "warning")
 
     return render_template("search_results.html", hospitals=results)
-
-
 
 
 # Form submission route
@@ -158,8 +147,7 @@ def submission():
         email=data.get("contact-email"),
         facilities=",".join(facilities),
         specialties=data.get("specialties"),
-        
-        
+            
     )
 
     db.session.add(hospital)
@@ -224,18 +212,28 @@ def reject_hospital(hospital_id):
     flash("⚠️ Hospital rejected", "warning")
     return redirect(url_for('system_admin'))
 
+@app.route('/update_hospital/<int:hospital_id>', methods=['GET', 'POST'])
+def update_hospital(hospital_id):
+    hospital = Hospital.query.get_or_404(hospital_id)
+
+    if request.method == 'POST':
+        hospital.hospital_name = request.form['name']
+        hospital.county = request.form['county']
+        hospital.phone = request.form['phone']
+        hospital.email = request.form['email']
+        hospital.specialties = request.form['specialties']
+        hospital.facilities = request.form['facilities']
+        db.session.commit()
+        flash('✅ Hospital details updated successfully.', 'success')
+        return redirect(url_for('system_admin'))
+
+    return render_template('update_hospital.html', hospital=hospital)
 
 @app.route('/logout-admin')
 def logout_admin():
     session.pop('admin_logged_in', None)
     flash("👋 Admin logged out.", "info")
     return redirect(url_for('admin'))
-
-
-
-
-
-
 
 # DB Test
 @app.route('/test-db')
