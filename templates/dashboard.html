@@ -5,41 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital Dashboard - MediFind</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css')}}">
 </head>
 <body>
   <div class="dashboard">
     <aside class="sidebar">
       <h2>MediFind</h2>
-       <h2>Welcome, {{ user.full_name }} 👋</h2>
+      <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
-      
-        <li><a href="{{ url_for('submission') }}">📝 Register Hospital</a></li>
-        <li><a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">📝 Update Hospital Information</a></li>
-      
+        <li><a href="{{ url_for('submission') }}">➕ Register Hospital</a></li>
       </ul>
     </aside>
 
     <main class="content">
       <header>
-        <h1>Welcome, {{ hospital_name }}</h1>
-        <p>This is your MediFind Hospital Dashboard</p>
+        <h1>Your Registered Hospitals</h1>
+        <p>This is your MediFind Dashboard. Manage your hospitals below.</p>
       </header>
 
-      <section class="cards">
-        <div class="card">
-          <h3>Hospital Status</h3>
-          <p>{{ status }}</p>
-        </div>
-        <div class="card">
-          <h3>Registration Date</h3>
-          <p>{{ registration_date }}</p>
-        </div>
-        <div class="card">
-          <h3>County</h3>
-          <p>{{ county }}</p>
-        </div>
-      </section>
+      {% if hospitals %}
+        <section class="cards">
+          {% for hospital in hospitals %}
+            <div class="card">
+              <h3>{{ hospital.hospital_name }}</h3>
+              <p><strong>Status:</strong> {{ hospital.status }}</p>
+              <p><strong>Registered on:</strong> {{ hospital.created_at.strftime('%d %b %Y') if hospital.created_at else 'N/A' }}</p>
+              <p><strong>County:</strong> {{ hospital.county }}</p>
+              <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}" class="button">📝 Update Info</a>
+            </div>
+          {% endfor %}
+        </section>
+      {% else %}
+        <p>No hospitals registered yet. <a href="{{ url_for('submission') }}">Register one now.</a></p>
+      {% endif %}
     </main>
   </div>
 </body>
