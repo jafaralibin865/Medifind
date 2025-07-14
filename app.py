@@ -97,6 +97,18 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        flash("Please log in to access the dashboard.", "warning")
+        return redirect(url_for('login'))
+
+    user = User.query.get(session['user_id'])
+    hospitals = Hospital.query.filter_by(status='Approved').all()
+
+    return render_template('dashboard.html', user=user, hospitals=hospitals)
+
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
