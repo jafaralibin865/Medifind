@@ -90,7 +90,7 @@ def login():
             session['user_id'] = user.id
             session['user_name'] = user.full_name
             flash("✅ Login successful!", "success")
-            return redirect(url_for('dashboard'))  # Redirects to dashboard.html
+            return redirect(url_for('admin_dashboard'))  # Redirects to dashboard.html
         else:
             flash("❌ Invalid email or password", "error")
             return redirect(url_for('login'))
@@ -101,22 +101,9 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
-
-
-
-
-
 @app.route('/admin_dashboard')
 def admin_dashboard():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin'))
-
-    pending_hospitals = Hospital.query.filter_by(status='Pending').all()
-    approved_hospitals = Hospital.query.filter_by(status='Approved').all()
-
-    return render_template('admin_dashboard.html',
-                           pending_hospitals=pending_hospitals,
-                           approved_hospitals=approved_hospitals)
+    return render_template('admin_dashboard.html')
 
 
 
@@ -192,7 +179,7 @@ def system_admin():
     approved_hospitals = Hospital.query.filter_by(status='Approved').all()
 
     return render_template(
-        'admin_dashboard.html',
+        'system_admin.html',
         pending_hospitals=pending_hospitals,
         approved_hospitals=approved_hospitals
     )
