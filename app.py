@@ -90,7 +90,7 @@ def login():
             session['user_id'] = user.id
             session['user_name'] = user.full_name
             flash("✅ Login successful!", "success")
-            return redirect(url_for('admin_dashboard'))  # Redirects to dashboard.html
+            return redirect(url_for('dashboard'))  # Redirects to dashboard.html
         else:
             flash("❌ Invalid email or password", "error")
             return redirect(url_for('login'))

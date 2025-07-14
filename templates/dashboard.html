@@ -1,44 +1,338 @@
+<!-- templates/admin_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hospital Dashboard - MediFind</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Admin Dashboard - MediFind Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Include all previous styles */
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: var(--dark);
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: var(--primary);
+        }
+        
+        .sidebar-menu a i {
+            width: 24px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background: #f0f7ff;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .welcome-message h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .welcome-message p {
+            color: var(--gray);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .card-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .disease-item {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .disease-item input {
+            width: auto;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-save:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .verification-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .verified {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+    </style>
 </head>
 <body>
-  <div class="dashboard">
-    <aside class="sidebar">
-      <h2>MediFind</h2>
-      <ul>
-      
-        <li><a href="{{ url_for('submission') }}">📝 Register Hospital</a></li>
-      
-      </ul>
-    </aside>
-
-    <main class="content">
-      <header>
-        <h1>Welcome, {{ hospital_name }}</h1>
-        <p>This is your MediFind Hospital Dashboard</p>
-      </header>
-
-      <section class="cards">
-        <div class="card">
-          <h3>Hospital Status</h3>
-          <p>{{ status }}</p>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-hospital"></i>
+                    <span>MediFind Admin</span>
+                </div>
+                <div class="hospital-info">
+                    <h3>{{ hospital[1] }}</h3>
+                    <p>{{ hospital[2] }}, {{ hospital[3] }}</p>
+                    <div class="verification-status {{ 'verified' if hospital[7] == 'verified' else 'pending' }}">
+                        {{ 'Verified' if hospital[7] == 'verified' else 'Pending Verification' }}
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-hospital-user"></i> Hospital Profile</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="{{ url_for(submission)}}"><i class="fas fa-question-circle"></i> register hospital</a></li>
+                <li><a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
         </div>
-        <div class="card">
-          <h3>Registration Date</h3>
-          <p>{{ registration_date }}</p>
+        
+        <div class="main-content">
+            <div class="dashboard-header">
+                <div class="welcome-message">
+                    <h1>Welcome, {{ session['username'] }}</h1>
+                    <p>Update your hospital information to help patients find you</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">{{ session['username'][0] }}</div>
+                    <div>
+                        <div>{{ session['username'] }}</div>
+                        <small>Hospital Administrator</small>
+                    </div>
+                </div>
+            </div>
+            
+            <form action="/admin/update" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Hospital Information</h2>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Hospital Name</label>
+                            <input type="text" id="name" name="name" value="{{ hospital[1] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" value="{{ hospital[2] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="county">County</label>
+                            <input type="text" id="county" name="county" value="{{ hospital[3] }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">Contact Phone</label>
+                            <input type="text" id="contact" name="contact" value="{{ hospital[4] }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="is_24hr" name="is_24hr" {{ 'checked' if hospital[5] }}>
+                        <label for="is_24hr">24/7 Emergency Services Available</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="is_nhif_accepted" name="is_nhif_accepted" {{ 'checked' if hospital[6] }}>
+                        <label for="is_nhif_accepted">We Accept NHIF Insurance</label>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Specialized Treatments</h2>
+                    </div>
+                    <p>Select all conditions that your hospital specializes in treating:</p>
+                    <div class="disease-grid">
+                        {% for disease in all_diseases %}
+                        <div class="disease-item">
+                            <input type="checkbox" id="disease{{ disease[0] }}" name="diseases" value="{{ disease[0] }}"
+                                  {{ 'checked' if disease[0] in treated_diseases }}>
+                            <label for="disease{{ disease[0] }}">{{ disease[1] }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="card">
-          <h3>County</h3>
-          <p>{{ county }}</p>
-        </div>
-      </section>
-    </main>
-  </div>
+    </div>
 </body>
 </html>
