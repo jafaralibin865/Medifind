@@ -212,7 +212,7 @@ def approve_hospital(hospital_id):
     hospital.status = 'Approved'
     db.session.commit()
     flash("✅ Hospital approved", "success")
-    return redirect(url_for('admin_dashboard'))
+    return redirect(url_for('system_admin'))
 
 @app.route('/reject/<int:hospital_id>')
 def reject_hospital(hospital_id):
@@ -222,7 +222,7 @@ def reject_hospital(hospital_id):
     hospital.status = 'Rejected'
     db.session.commit()
     flash("⚠️ Hospital rejected", "warning")
-    return redirect(url_for('admin_dashboard'))
+    return redirect(url_for('system_admin'))
 
 
 @app.route('/logout-admin')
