@@ -5,121 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital Dashboard - MediFind</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f4f6f9;
-    }
-
-    .dashboard {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 240px;
-      background-color: #1a73e8;
-      color: white;
-      padding: 20px;
-    }
-
-    .sidebar h2 {
-      font-size: 22px;
-      margin-bottom: 30px;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar ul li {
-      margin: 20px 0;
-    }
-
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .sidebar ul li a:hover {
-      text-decoration: underline;
-    }
-
-    .content {
-      flex: 1;
-      padding: 40px;
-    }
-
-    .content header {
-      margin-bottom: 30px;
-    }
-
-    .content h1 {
-      color: #333;
-    }
-
-    .cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background-color: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      width: 300px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      color: #1a73e8;
-    }
-
-    .card p {
-      font-size: 16px;
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css')}}">
 </head>
 <body>
   <div class="dashboard">
     <aside class="sidebar">
       <h2>MediFind</h2>
-      <h2>👋 {{ user.full_name }}</h2>
+       <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
-        <li><a href="{{ url_for('submission') }}">➕ Register Hospital</a></li>
-        {% if hospitals %}
-          {% for hospital in hospitals %}
-            <li><a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">📝 Update {{ hospital.hospital_name }}</a></li>
-          {% endfor %}
-        {% else %}
-          <li>No hospital registered yet</li>
-        {% endif %}
-        <li><a href="{{ url_for('logout_admin') }}">🚪 Logout</a></li>
+      
+        <li><a href="{{ url_for('submission') }}">📝 Register Hospital</a></li>
+        <li><a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">📝 Update Hospital Information</a></li>
+      
       </ul>
     </aside>
 
     <main class="content">
       <header>
-        <h1>🏥 Hospital Dashboard</h1>
-        <p>Welcome to your MediFind management panel.</p>
+        <h1>Welcome, {{ hospital_name }}</h1>
+        <p>This is your MediFind Hospital Dashboard</p>
       </header>
 
       <section class="cards">
-        {% for hospital in hospitals %}
         <div class="card">
-          <h3>{{ hospital.hospital_name }}</h3>
-          <p><strong>Status:</strong> {{ hospital.status or 'Pending' }}</p>
-          <p><strong>County:</strong> {{ hospital.county }}</p>
-          <p><strong>Email:</strong> {{ hospital.email }}</p>
-          <p><a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">Edit Details</a></p>
+          <h3>Hospital Status</h3>
+          <p>{{ status }}</p>
         </div>
-        {% endfor %}
+        <div class="card">
+          <h3>Registration Date</h3>
+          <p>{{ registration_date }}</p>
+        </div>
+        <div class="card">
+          <h3>County</h3>
+          <p>{{ county }}</p>
+        </div>
       </section>
     </main>
   </div>
