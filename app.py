@@ -100,13 +100,13 @@ def login():
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
-        flash("Please log in to access the dashboard.", "warning")
         return redirect(url_for('login'))
 
     user = User.query.get(session['user_id'])
-    hospitals = Hospital.query.filter_by(status='Approved').all()
+    hospitals = Hospital.query.filter_by(email=user.email).all()
 
     return render_template('dashboard.html', user=user, hospitals=hospitals)
+
 
 
 
@@ -239,7 +239,8 @@ def update_hospital(hospital_id):
         flash('✅ Hospital details updated successfully.', 'success')
         return redirect(url_for('system_admin'))
 
-    return render_template('update_hospital.html', hospital=hospital)
+    return render_template('update_hospital.html', hospital=hospital, counties=KENYA_COUNTIES)
+
 
 @app.route('/logout-admin')
 def logout_admin():
