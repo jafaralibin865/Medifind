@@ -48,7 +48,25 @@ KENYA_COUNTIES = [
 # Home page with form
 @app.route('/')
 def index():
-    return render_template('index.html', counties=KENYA_COUNTIES)
+    # Approved (verified) hospitals
+    verified_count = Hospital.query.filter_by(status='Approved').count()
+
+    # Extract unique specialties
+    all_specialties = Hospital.query.with_entities(Hospital.specialties).all()
+    specialty_set = set()
+    for row in all_specialties:
+        specialties = [s.strip() for s in row.specialties.split(',') if s.strip()]
+        specialty_set.update(specialties)
+    specialties_count = len(specialty_set)
+
+    # Unique counties
+    counties_count = Hospital.query.with_entities(Hospital.county).distinct().count()
+
+    return render_template('index.html',
+                           verified_count=verified_count,
+                           specialties_count=specialties_count,
+                           counties_count=counties_count)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
