@@ -5,40 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital Dashboard - MediFind</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-  
 </head>
 <body>
   <div class="dashboard">
     <aside class="sidebar">
       <h2>MediFind</h2>
-       <h2>Welcome, {{ user.full_name }} 👋</h2>
+      <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
-      
         <li><a href="{{ url_for('submission') }}">📝 Register Hospital</a></li>
-        <li><a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">📝 Update Hospital Information</a></li>
-      
+        {% for hospital in hospitals %}
+          <li>
+            <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
+              📝 Update {{ hospital.name }} Information
+            </a>
+          </li>
+        {% endfor %}
       </ul>
     </aside>
 
     <main class="content">
       <header>
-        <h1>Welcome, {{ hospital_name }}</h1>
+        <h1>Welcome to Your Dashboard</h1>
         <p>This is your MediFind Hospital Dashboard</p>
       </header>
 
       <section class="cards">
-        <div class="card">
-          <h3>Hospital Status</h3>
-          <p>{{ status }}</p>
-        </div>
-        <div class="card">
-          <h3>Registration Date</h3>
-          <p>{{ registration_date }}</p>
-        </div>
-        <div class="card">
-          <h3>County</h3>
-          <p>{{ county }}</p>
-        </div>
+        {% for hospital in hospitals %}
+          <div class="card">
+            <h3>Hospital Name</h3>
+            <p>{{ hospital.name }}</p>
+          </div>
+          <div class="card">
+            <h3>Status</h3>
+            <p>{{ hospital.status }}</p>
+          </div>
+          <div class="card">
+            <h3>Registration Date</h3>
+            <p>{{ hospital.registration_date }}</p>
+          </div>
+          <div class="card">
+            <h3>County</h3>
+            <p>{{ hospital.county }}</p>
+          </div>
+        {% endfor %}
       </section>
     </main>
   </div>
