@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
-# Create the database instance
 db = SQLAlchemy()
+
 
 # Hospital model
 class Hospital(db.Model):
