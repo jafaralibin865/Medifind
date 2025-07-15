@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital Dashboard - MediFind</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
   
 </head>
@@ -14,7 +16,12 @@
       <h2>MediFind</h2>
       <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
-        <li><a href="{{ url_for('submission') }}">➕ Register Hospital</a></li>
+       <li>
+  <a href="{{ url_for('submission') }}">
+    <i class="fas fa-plus-circle"></i> Register Hospital
+  </a>
+</li>
+
         {% for hospital in hospitals %}
           <li>
             <button class="update-btn" data-id="{{ hospital.id }}">✏️ Update {{ hospital.name }}</button>
