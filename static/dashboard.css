@@ -42,7 +42,7 @@ body {
 .sidebar ul li button {
    display: inline-block;
   padding: 12px 24px;               /* Bigger size */
-  background-color: #1a73e8;        /* Professional blue */
+  background-color: #e81a1a;        /* Professional red */
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -56,7 +56,9 @@ body {
 
 .sidebar ul li a:hover,
 .sidebar ul li button:hover {
-  text-decoration: underline;
+   background-color: #e81a1a;       /* Darker on hover */
+  text-decoration: none;
+  transform: translateY(-2px);  text-decoration: ;
 }
 
 /* Content */
