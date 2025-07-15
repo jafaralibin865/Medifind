@@ -45,9 +45,11 @@ body {
   background: transparent;
   border: none;
   font-weight: bold;
+  background-color: darkred;
   padding: 6px 0;
   font-size: 0.95rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .sidebar ul li a:hover,
