@@ -40,6 +40,8 @@ body {
 
 .sidebar ul li a,
 .sidebar ul li button {
+    width: 100%;
+  max-width: 220px;
    display: inline-block;
   padding: 12px 24px;               /* Bigger size */
   background-color: #e81a1a;        /* Professional red */
@@ -58,7 +60,7 @@ body {
 .sidebar ul li button:hover {
    background-color: #e81a1a;       /* Darker on hover */
   text-decoration: none;
-  transform: translateY(-2px);  text-decoration: ;
+  transform: translateY(-2px);  text-decoration:none;
 }
 
 /* Content */
