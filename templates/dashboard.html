@@ -5,32 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hospital Dashboard - MediFind</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-</head>
-<body>
-  <div class="dashboard">
-    <aside class="sidebar">
-      <h2>MediFind</h2>
-      <h2>Welcome, {{ user.full_name }} 👋</h2>
-      <ul>
-        <li><a href="{{ url_for('submission') }}">📝 Register Hospital</a></li>
-        {% for hospital in hospitals %}
-          <li>
-            <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
-              📝 Update {{ hospital.name }} Information
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </aside>
-
-    <main class="content">
-      <header><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hospital Dashboard - MediFind</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.js') }}">
 </head>
 <body>
   <div class="dashboard">
@@ -40,6 +15,11 @@
       <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
         <li><a href="{{ url_for('submission') }}">➕ Register Hospital</a></li>
+        {% for hospital in hospitals %}
+          <li>
+            <button class="update-btn" data-id="{{ hospital.id }}">✏️ Update {{ hospital.name }}</button>
+          </li>
+        {% endfor %}
       </ul>
     </aside>
 
@@ -58,7 +38,7 @@
               <p><strong>Status:</strong> {{ hospital.status }}</p>
               <p><strong>Registered:</strong> {{ hospital.registration_date }}</p>
               <p><strong>County:</strong> {{ hospital.county }}</p>
-              <button onclick="loadUpdateForm({hospital,id})">✏️ Update Hospital</button>
+              <button class="update-btn" data-id="{{ hospital.id }}">✏️ Update Hospital</button>
             </div>
           {% endfor %}
         </section>
@@ -68,44 +48,7 @@
     </main>
   </div>
 
-  <!-- JavaScript to Load Update Form Dynamically -->
-  <script>
-    function loadUpdateForm(hospitalId) {
-      fetch(`/update_hospital_partial/${hospitalId}`)
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById("main-content").innerHTML = html;
-        });
-    }
-  </script>
-</body>
-</html>
-
-        <h1>Welcome to Your Dashboard</h1>
-        <p>This is your MediFind Hospital Dashboard</p>
-      </header>
-
-      <section class="cards">
-        {% for hospital in hospitals %}
-          <div class="card">
-            <h3>Hospital Name</h3>
-            <p>{{ hospital.name }}</p>
-          </div>
-          <div class="card">
-            <h3>Status</h3>
-            <p>{{ hospital.status }}</p>
-          </div>
-          <div class="card">
-            <h3>Registration Date</h3>
-            <p>{{ hospital.registration_date }}</p>
-          </div>
-          <div class="card">
-            <h3>County</h3>
-            <p>{{ hospital.county }}</p>
-          </div>
-        {% endfor %}
-      </section>
-    </main>
-  </div>
+  <!-- External JavaScript -->
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 </body>
 </html>
