@@ -268,7 +268,7 @@ def update_hospital(hospital_id):
         hospital.facilities = request.form['facilities']
         db.session.commit()
         flash('✅ Hospital details updated successfully.', 'success')
-        return redirect(url_for('system_admin'))
+        return redirect(url_for('dashboard'))
 
     return render_template('update_hospital.html', hospital=hospital, counties=KENYA_COUNTIES)
 
