@@ -22,10 +22,9 @@
   </a>
 </li>
 
-        {% for hospital in hospitals %}
-          <button class="btn-link update-btn" data-id="{{ hospital.id }}">
-  <i class="fas fa-edit"></i> Update Hospital
-</button>
+          <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
+    <i class="fas fa-plus-circle"></i> Update Information
+  </a>
         {% endfor %}
       </ul>
     </aside>
@@ -49,11 +48,9 @@
         <p><strong>Facilities:</strong> {{ hospital.facilities }}</p>
         <p><strong>Specialties:</strong> {{ hospital.specialties }}</p>
 
-         <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
-    <i class="fas fa-plus-circle"></i> Update Information
-  </a>
+      
 </li>
-              <button class="update-btn" data-id="{{ hospital.id }}">✏️ Update Hospital</button>
+          
             </div>
           {% endfor %}
         </section>
