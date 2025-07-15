@@ -16,17 +16,21 @@
       <h2>MediFind</h2>
       <h2>Welcome, {{ user.full_name }} 👋</h2>
       <ul>
-       <li>
-  <a href="{{ url_for('submission') }}">
-    <i class="fas fa-plus-circle"></i> Register Hospital
-  </a>
-</li>
+  <li>
+    <a href="{{ url_for('submission') }}">
+      <i class="fas fa-plus-circle"></i> Register Hospital
+    </a>
+  </li>
 
-          <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
-    <i class="fas fa-plus-circle"></i> Update Information
-  </a>
-        {% endfor %}
-      </ul>
+  {% for hospital in hospitals %}
+    <li>
+      <a href="{{ url_for('update_hospital', hospital_id=hospital.id) }}">
+        <i class="fas fa-pen"></i> Update {{ hospital.hospital_name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
     </aside>
 
     <!-- Main Content -->
