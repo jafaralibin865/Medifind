@@ -17,7 +17,6 @@ db.init_app(app)
 
 # Create tables on startup
 with app.app_context():
-    db.drop_all()
     db.create_all()
     try:
         db.session.execute(text("SELECT 1"))
@@ -141,9 +140,15 @@ def search():
 # Form submission route
 @app.route('/submission', methods=['POST', 'GET'])
 def submission():
-
     if request.method == 'GET':
         return render_template('submission.html', counties=KENYA_COUNTIES)
+
+    # Get the current logged-in user's ID from session
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("⚠️ Please log in to submit a hospital.", "warning")
+        return redirect(url_for('login'))
+
     data = request.form
 
     facilities = []
@@ -166,7 +171,8 @@ def submission():
         email=data.get("contact-email"),
         facilities=",".join(facilities),
         specialties=data.get("specialties"),
-            
+        status="Pending",
+        user_id=user_id  # ✅ Set user_id here
     )
 
     db.session.add(hospital)
