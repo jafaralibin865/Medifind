@@ -24,7 +24,63 @@
     </aside>
 
     <main class="content">
+      <header><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Dashboard - MediFind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>MediFind</h2>
+      <h2>Welcome, {{ user.full_name }} 👋</h2>
+      <ul>
+        <li><a href="{{ url_for('submission') }}">➕ Register Hospital</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="content">
       <header>
+        <h1>Registered Hospitals</h1>
+        <p>Below are your registered hospital(s)</p>
+      </header>
+
+      {% if hospitals %}
+        <section class="cards">
+          {% for hospital in hospitals %}
+            <div class="card">
+              <h3>{{ hospital.name }}</h3>
+              <p><strong>Status:</strong> {{ hospital.status }}</p>
+              <p><strong>Registered:</strong> {{ hospital.registration_date }}</p>
+              <p><strong>County:</strong> {{ hospital.county }}</p>
+              <button onclick="loadUpdateForm({hospital,id})">✏️ Update Hospital</button>
+            </div>
+          {% endfor %}
+        </section>
+      {% else %}
+        <p>No hospitals registered yet.</p>
+      {% endif %}
+    </main>
+  </div>
+
+  <!-- JavaScript to Load Update Form Dynamically -->
+  <script>
+    function loadUpdateForm(hospitalId) {
+      fetch(`/update_hospital_partial/${hospitalId}`)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById("main-content").innerHTML = html;
+        });
+    }
+  </script>
+</body>
+</html>
+
         <h1>Welcome to Your Dashboard</h1>
         <p>This is your MediFind Hospital Dashboard</p>
       </header>
