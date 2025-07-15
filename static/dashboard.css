@@ -13,6 +13,21 @@ body {
   min-height: 100vh;
 }
 
+/* Dashboard base */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f5f7fa;
+}
+
+
 /* Sidebar */
 .sidebar {
   width: 250px;
@@ -161,10 +176,36 @@ header p {
   }
 }
 
-@media (max-width: 600px) {
-  .btn-link {
-    margin: 10px auto;
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar ul {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar ul li {
+    margin: 10px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .content {
+    padding: 1rem;
   }
 }
+
 
