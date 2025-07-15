@@ -17,6 +17,7 @@ db.init_app(app)
 
 # Create tables on startup
 with app.app_context():
+    db.drop_all()
     db.create_all()
     try:
         db.session.execute(text("SELECT 1"))
