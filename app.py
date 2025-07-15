@@ -7,10 +7,11 @@ from models import db, Hospital, User
 
 app = Flask(__name__)
 
-# Database configuration (fix render database URL format)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace('postgres://', 'postgresql://', 1)
+
+# Use Railway database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL1').replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+
 
 # Create tables on startup
 with app.app_context():
@@ -100,13 +101,13 @@ def login():
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
+        flash("Please log in to access the dashboard.", "warning")
         return redirect(url_for('login'))
 
     user = User.query.get(session['user_id'])
-    hospitals = Hospital.query.filter_by(email=user.email).all()
+    hospitals = Hospital.query.filter_by(status='Approved').all()
 
     return render_template('dashboard.html', user=user, hospitals=hospitals)
-
 
 
 
