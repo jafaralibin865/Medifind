@@ -107,9 +107,12 @@ def dashboard():
         return redirect(url_for('login'))
 
     user = User.query.get(session['user_id'])
-    hospital = Hospital.query.filter_by(status='Approved').all()
 
-    return render_template('dashboard.html', user=user, hospital=hospital)
+    # ✅ Fetch only the approved hospitals for this user
+    hospitals = Hospital.query.filter_by(user_id=user.id, status='Approved').all()
+
+    return render_template('dashboard.html', user=user, hospitals=hospitals)
+
 
 
 
