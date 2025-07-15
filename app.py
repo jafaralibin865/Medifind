@@ -109,7 +109,7 @@ def dashboard():
     user = User.query.get(session['user_id'])
     hospital = Hospital.query.filter_by(status='Approved').all()
 
-    return render_template('dashboard.html', user=user, hospitals=hospital)
+    return render_template('dashboard.html', user=user, hospital=hospital)
 
 
 
