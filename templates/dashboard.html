@@ -34,10 +34,13 @@
         <section class="cards">
           {% for hospital in hospitals %}
             <div class="card">
-              <h3>{{ hospital.name }}</h3>
-              <p><strong>Status:</strong> {{ hospital.status }}</p>
-              <p><strong>Registered:</strong> {{ hospital.registration_date }}</p>
-              <p><strong>County:</strong> {{ hospital.county }}</p>
+                      <h3>{{ hospital.hospital_name }}</h3>
+        <p><strong>Status:</strong> {{ hospital.status }}</p>
+        <p><strong>County:</strong> {{ hospital.county }}</p>
+        <p><strong>Phone:</strong> {{ hospital.phone }}</p>
+        <p><strong>Email:</strong> {{ hospital.email }}</p>
+        <p><strong>Facilities:</strong> {{ hospital.facilities }}</p>
+        <p><strong>Specialties:</strong> {{ hospital.specialties }}</p>
               <button class="update-btn" data-id="{{ hospital.id }}">✏️ Update Hospital</button>
             </div>
           {% endfor %}
