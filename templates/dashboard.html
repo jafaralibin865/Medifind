@@ -13,8 +13,11 @@
   <div class="dashboard">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h2>MediFind</h2>
-      <h2>Welcome, {{ user.full_name }} 👋</h2>
+      
+      <nav class="navbar">
+            <div class="logo">MediFind</div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
       <ul>
   <li>
     <a href="{{ url_for('submission') }}">
@@ -30,12 +33,15 @@
     </li>
   {% endfor %}
 </ul>
+</nav>
 
     </aside>
 
     <!-- Main Content -->
     <main id="main-content" class="content">
       <header>
+        <h1>MediFind</h2>
+      <h2>Welcome, {{ user.full_name }} 👋</h2>
         <h1>Registered Hospitals</h1>
         <p>Below are your registered hospital(s)</p>
       </header>
