@@ -1,0 +1,124 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f2f6fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Card */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dfe6ed;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #198754; /* Bootstrap success green */
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+/* Inputs & Textareas */
+.form-control {
+  font-size: 1rem;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 4px rgba(26, 115, 232, 0.3);
+  outline: none;
+}
+
+/* Button Group */
+.text-center {
+  margin-top: 1.5rem;
+}
+
+button[type="submit"],
+a.btn {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 30px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover,
+a.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: #1a73e8;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0f5fd5;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .container {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  button[type="submit"],
+  a.btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
