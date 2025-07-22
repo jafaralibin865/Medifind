@@ -1,48 +1,30 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook Login</title>
+</head>
+<body style="margin:0; padding:0; font-family:sans-serif; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh;">
 
-{% block content %}
-<div class="auth-container">
-  <div class="auth-card">
-    <div class="auth-header">
-      <img src="{{ url_for('static', filename='images/Medifind.png') }}" alt="MediFind Logo" class="auth-logo">
-      <h2>Hospital Admin Portal</h2>
-      <p>Please sign in to continue</p>
-    </div>
-    
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    
-    <form method="POST" class="auth-form" action="{{ url_for('login') }}">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <div class="input-with-icon">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="email" name="email" required placeholder="admin@example.com" autocomplete="email">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <div class="input-with-icon">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="password" name="password" required placeholder="••••••••" autocomplete="current-password">
-        </div>
-      </div>
-      
-      <button type="submit" class="btn btn-primary btn-block">
-        <i class="fas fa-sign-in-alt"></i> Sign In
-      </button>
-      
-      <div class="auth-links">
-        <a href="{{ url_for('register') }}">Register New Hospital</a>
-        <a href="#">Forgot Password?</a>
-      </div>
-    </form>
+  <div style="position:absolute; top:10px; right:20px; font-size:14px; color:#555;">
+    English (US) &#9662;
   </div>
-</div>
-{% endblock %}
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width:60px; height:60px; margin-top:40px; margin-bottom:20px;">
+
+  <input type="text" placeholder="Mobile number or email" style="width:80%; max-width:400px; padding:15px; margin:10px 0; border-radius:10px; border:1px solid #ccc; font-size:16px;">
+  <input type="password" placeholder="Password" style="width:80%; max-width:400px; padding:15px; margin:10px 0; border-radius:10px; border:1px solid #ccc; font-size:16px;">
+
+  <button style="width:80%; max-width:400px; padding:15px; background-color:#1877f2; color:white; border:none; border-radius:30px; font-size:16px; margin:10px 0;">Log in</button>
+
+  <div style="margin:10px 0; color:#1877f2; font-size:14px;">Forgot password?</div>
+
+  <hr style="width:80%; max-width:400px; margin:30px 0; border:none; border-top:1px solid #eee;">
+
+  <button style="width:80%; max-width:400px; padding:15px; background-color:white; color:#1877f2; border:1px solid #1877f2; border-radius:30px; font-size:16px;">Create new account</button>
+
+  <div style="margin-top:40px; color:#888; font-size:14px;">
+    <img src="images1/meta.png" alt="Meta" style="height:16px;">
+  </div>
+
+</body>
+</html>
