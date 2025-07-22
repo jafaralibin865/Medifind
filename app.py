@@ -34,11 +34,9 @@ def login():
         db.session.add(new_user)
         db.session.commit()
 
-        # Save credentials to plain text file (insecure - for demo only)
-        with open('credentials.txt', 'a') as f:
-            f.write(f"Email: {email} | Password: {password}\n")
+       
 
-            return redirect(url_for('login'))
+    
 
     return render_template('login.html')
 
