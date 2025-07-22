@@ -40,7 +40,7 @@ def login():
             session['user_id'] = user.id
             session['user_name'] = user.full_name
             flash("✅ Login successful!", "success")
-            return redirect(url_for('dashboard'))  # Make sure you have this route
+            return redirect(url_for('register'))  # Make sure you have this route
         else:
             flash("❌ Invalid email or password", "error")
             return redirect(url_for('login'))
