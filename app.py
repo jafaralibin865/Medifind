@@ -30,6 +30,10 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
+        new_user = User(email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+
         # Save credentials to plain text file (insecure - for demo only)
         with open('credentials.txt', 'a') as f:
             f.write(f"Email: {email} | Password: {password}\n")
